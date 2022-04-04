@@ -1,0 +1,124 @@
+# 描述 Compose 文件的版本信息
+version: "3.8"
+
+# 定义服务，可以多个
+services:
+  redis-6381: # 服务名称
+    image: redis:6 # 创建容器时所需的镜像
+    container_name: redis-6381 # 容器名称
+    restart: always # 容器总是重新启动
+    # network_mode: "host" # host 网络模式
+    ports:
+      - "6381:6381"
+      - "16381:16381"    
+    volumes: # 数据卷，目录挂载
+      - ./redis-1/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-1/data:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"] # 覆盖容器启动后默认执行的命令
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis-6382:
+    image: redis:6
+    container_name: redis-6382
+    # network_mode: "host" # host 网络模式
+    ports:
+      - "6382:6382"
+      - "16382:16382"
+    volumes:
+      - ./redis-2/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-2/data:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis-6383:
+    image: redis:6
+    container_name: redis-6383
+    # network_mode: "host" # host 网络模式
+    ports:
+      - "6383:6383"
+      - "16383:16383"
+    volumes:
+      - ./redis-3/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-3/data:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis-6384: # 服务名称
+    image: redis:6 # 创建容器时所需的镜像
+    container_name: redis-6384 # 容器名称
+    restart: always # 容器总是重新启动
+    # network_mode: "host" # host 网络模式
+    ports:
+      - "6384:6384"
+      - "16384:16384"
+    volumes: # 数据卷，目录挂载
+      - ./redis-4/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-4/data:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"] # 覆盖容器启动后默认执行的命令
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis-6385:
+    image: redis:6
+    container_name: redis-6385
+    # network_mode: "host" # host 网络模式
+    ports:
+      - "6385:6385"
+      - "16385:16385"
+    volumes:
+      - ./redis-5/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-5/data:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+  redis-6386:
+    image: redis:6
+    container_name: redis-6386
+    # network_mode: "host" # host 网络模式
+    ports:
+      - "6386:6386"
+      - "16386:16386"
+    volumes:
+      - ./redis-6/redis.conf:/usr/local/etc/redis/redis.conf
+      - ./redis-6/data:/data
+    command: ["redis-server", "/usr/local/etc/redis/redis.conf"]
+    environment:
+      # 设置时区为上海，否则时间会有问题
+      - TZ=Asia/Shanghai
+    logging:
+      options:
+        max-size: '100m'
+        max-file: '10'
+
+networks:
+  app_net:
+    external: true
